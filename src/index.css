@@ -8,6 +8,10 @@
 	.primary-color {
 		@apply bg-primary bg-clip-text text-transparent;
 	}
+
+	.section-gap {
+		@apply mt-[135px]
+	}
 }
 
 *,
@@ -20,6 +24,8 @@
 
 body {
 	font-family: "Manrope", sans-serif;
+	line-height: normal;
+	letter-spacing: normal;
 }
 
 .active {

@@ -9,6 +9,8 @@ export default {
 			dark3: "#757575",
 			dark4: "#A3A3A3",
 			dark5: "#F4F4F4",
+			heroBG: "#f9f9ff",
+			primary: "linear-gradient(102deg, #7E90FE, #9873FF)",
 		},
 		fontSize: {
 			heading: "80px",

@@ -29,15 +29,17 @@ export default function Navbar() {
 	));
 
 	return (
-		<nav className="flex items-center justify-between max-w-container mx-auto py-12">
-			{/* navlogo */}
-			<Logo place="header" />
+		<nav className="absolute top-0 left-0 w-full">
+			<div className="flex items-center justify-between max-w-container mx-auto py-12 ">
+				{/* navlogo */}
+				<Logo place="header" />
 
-			{/* links */}
-			<ul className="space-x-12">{navLinks}</ul>
+				{/* links */}
+				<ul className="space-x-12">{navLinks}</ul>
 
-			{/* button */}
-			<Button>{"Start Applying"}</Button>
+				{/* button */}
+				<Button>{"Start Applying"}</Button>
+			</div>
 		</nav>
 	);
 }
