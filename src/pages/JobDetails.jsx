@@ -7,40 +7,55 @@ import phone from "../assets/icons/phone.png";
 import email from "../assets/icons/email.png";
 import location from "../assets/icons/location2.png";
 import Button from "../shared/Button";
+import { useLoaderData, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { savedAppliedJobs } from "../local-storage/localStorage";
 
 export default function JobDetails() {
+	const [applied, setApplied] = useState(false);
+
+	const alljobs = useLoaderData();
+
+	const { id } = useParams();
+	const jobId = parseInt(id);
+
+	const job = alljobs.find((job) => job.id === jobId);
+
+	const handleAppliedConfirm = () => {
+		if (applied) {
+			return;
+		}
+
+		savedAppliedJobs(jobId)
+		setApplied(true);
+		toast.success("Successfully applied!");
+	};
+
 	return (
 		<>
 			<CommonBanner>Job Details</CommonBanner>
 			<div className="mt-[130px] flex items-start justify-between gap-4 max-w-container mx-auto">
 				<div className="w-5/6 space-y-6">
 					<p className="text-[16px] text-dark3 font-medium">
-						<span className="text-dark1 font-extrabold">Job Description:</span>A
-						UI/UX (User Interface/User Experience) designer is responsible for
-						designing and creating engaging and effective interfaces for
-						software and web applications. This includes designing the layout,
-						visual design, and interactivity of the user interface.
+						<span className="text-dark1 font-extrabold">Job Description:</span>
+						{job.job_description}
 					</p>
 					<p className="text-[16px] text-dark3 font-medium">
 						<span className="text-dark1 font-extrabold ">
 							Job Responsibility:
 						</span>{" "}
-						Collaborating with cross-functional teams: UI/UX designers often
-						work closely with other teams, including product management,
-						engineering, and marketing, to ensure that the user interface is
-						aligned with business and technical requirements. You will need to
-						be able to effectively communicate your design ideas and gather
-						feedback from other team members.
+						{job.job_responsibility}
 					</p>
 					<p className="text-[16px] font-extrabold text-dark1">
 						Educational Requirements:
 					</p>
 					<p className="text-[16px] font-semibold text-dark3">
-						Bachelor degree to complete any reputational university.
+						{job.educational_requirements}
 					</p>
 					<p className="text-[16px] font-extrabold text-dark1">Experiences:</p>
 					<p className="text-[16px] font-semibold text-dark3">
-						2-3 Years in this field.
+						{job.experiences}
 					</p>
 				</div>
 
@@ -52,12 +67,12 @@ export default function JobDetails() {
 						<JobFiled
 							filedName="Salary"
 							icon={currency}
-							filedValue="100K - 150K (Per Month)"
+							filedValue={job.salary}
 						/>
 						<JobFiled
 							filedName="Job Title"
 							icon={calendar}
-							filedValue="Product Designer"
+							filedValue={job.job_title}
 						/>
 						<h4 className="border-b text-[20px] font-extrabold text-dark1 py-6 border-[#cac2f7]">
 							Contact Information
@@ -65,21 +80,23 @@ export default function JobDetails() {
 						<JobFiled
 							filedName="Phone"
 							icon={phone}
-							filedValue="01750-00 00 00"
+							filedValue={job.contact_information.phone}
 						/>
 						<JobFiled
 							filedName="Email"
 							icon={email}
-							filedValue="info@gmail.com"
+							filedValue={job.contact_information.email}
 						/>
 						<JobFiled
 							filedName="Address"
 							icon={location}
-							filedValue="Dhanmondi 32, Sukrabad Dhaka, Bangladesh"
+							filedValue={job.contact_information.address}
 						/>
 					</div>
 
-					<Button width="width">Apply Now</Button>
+					<Button onFire={handleAppliedConfirm} width="width">
+						Apply Now
+					</Button>
 				</div>
 			</div>
 		</>

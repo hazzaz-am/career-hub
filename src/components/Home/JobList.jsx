@@ -10,7 +10,6 @@ export default function JobList() {
 			.then((response) => response.json())
 			.then((categoriesData) => setCategoryList(categoriesData));
 	}, []);
-  console.log(categoryList);
 
 	return (
 		<div className="grid grid-cols-4 gap-6">

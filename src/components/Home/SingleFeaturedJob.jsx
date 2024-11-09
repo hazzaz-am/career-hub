@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import locationImg from "../../assets/icons/Location.png";
 import currencyImg from "../../assets/icons/currency.png";
 import Button from "../../shared/Button";
@@ -25,7 +26,9 @@ export default function SingleFeaturedJob({ job }) {
 				<LocationCurrency icon={locationImg} title={job.location} />
 				<LocationCurrency icon={currencyImg} title={job.salary} />
 			</div>
-			<Button>View Details</Button>
+			<Link to={`/job-details/${job.id}`}>
+				<Button>View Details</Button>
+			</Link>
 		</div>
 	);
 }
